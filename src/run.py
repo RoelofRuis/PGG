@@ -10,19 +10,19 @@ from forms import Point, Line
 # (4) and drawing the result to a Screen.
 
 # Setting up the basic objects:
-c = Camera()
-w = World()
 s = Screen()
+c = Camera(s)
+w = World()
 
 # Fill the world with objects:
 
 w.addShapes([
-    Line(Point(100,100,0), Point(200,50,0)),
+    Line(Point(100,100,0), Point(200,100,0)),
     Line(Point(100,100,0), Point(100,200,0)),
-    Line(Point(200,50,0), Point(200,200,0)),
+    Line(Point(200,100,0), Point(200,200,0)),
     Line(Point(100,200,0), Point(200,200,0)),
     Line(Point(100,100,0), Point(100,100,100)),
-    Line(Point(200,50,0), Point(200,100,100)),
+    Line(Point(200,100,0), Point(200,100,100)),
     Line(Point(200,200,0), Point(200,200,100)),
     Line(Point(100,200,0), Point(100,200,100)),
     Line(Point(100,100,100), Point(100,200,100)),
@@ -31,8 +31,4 @@ w.addShapes([
     Line(Point(100,200,100), Point(200,200,100)),
 ])
 
-
-
-
-# Look at the world
-# s.show()
+w.view(c)

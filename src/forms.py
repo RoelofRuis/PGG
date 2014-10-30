@@ -2,13 +2,14 @@ import math
 
 from calc import Matrix
 
-# The Shape object represents any shape object
-class Shape():
+# The Projectable object represents any object that is projectable
+# These objects should implement the 'project' method
+class Projectable():
     def project(self):
         raise NotImplementedError()
 
 # The Point object represents a point object in 3 Dimensional space
-class Point(Shape):
+class Point():
     def __init__(self, my_x, my_y, my_z):
         self.x = my_x
         self.y = my_y
@@ -41,7 +42,7 @@ class Point(Shape):
         
 
 # The Line Object represents a line between two points
-class Line(Shape):
+class Line(Projectable):
     def __init__(self, point_a, point_b):
         self.pt_a = point_a
         self.pt_b = point_b
@@ -64,6 +65,9 @@ class Line(Shape):
 
     def getPoints(self):
         return [self.pt_a, self.pt_b]
+
+    def project(self, camera):
+        camera.projectLine(self)
     
 
 # The Polygon object represents a polygon
