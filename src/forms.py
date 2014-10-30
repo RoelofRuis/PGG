@@ -1,8 +1,14 @@
 import math
 
 from calc import Matrix
-        
-class Point():
+
+# The Shape object represents any shape object
+class Shape():
+    def project(self):
+        raise NotImplementedError()
+
+# The Point object represents a point object in 3 Dimensional space
+class Point(Shape):
     def __init__(self, my_x, my_y, my_z):
         self.x = my_x
         self.y = my_y
@@ -30,11 +36,12 @@ class Point():
         self.y += new_y
         self.z += new_z
 
-    def getCoords(self):
-        return Matrix(3,1).setTo([[self.x], [self.y], [self.z]])
+    def getHomCoords(self):
+        return Matrix(4,1).setTo([[self.x], [self.y], [self.z], [1]])
         
 
-class Line():
+# The Line Object represents a line between two points
+class Line(Shape):
     def __init__(self, point_a, point_b):
         self.pt_a = point_a
         self.pt_b = point_b
@@ -59,6 +66,7 @@ class Line():
         return [self.pt_a, self.pt_b]
     
 
+# The Polygon object represents a polygon
 class Polygon():
     def __init__(self, point_a, point_b, point_c):
         self.pt_a = point_a

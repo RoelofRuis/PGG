@@ -1,3 +1,4 @@
+# The matrix object represents a simple n times m matrix
 class Matrix():
     def __init__(self, n, m):
         self.n = n
