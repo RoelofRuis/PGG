@@ -12,8 +12,5 @@ class World():
         if shape.__class__.__bases__[0] == Projectable:
             self.shapes.append(shape)
 
-    def view(self, camera):
-        for shape in self.shapes:
-            print(shape)
-            shape.project(camera)
-        camera.getScreen().show()
+    def getShapes(self):
+        return self.shapes

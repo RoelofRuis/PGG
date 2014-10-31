@@ -10,25 +10,24 @@ from forms import Point, Line
 # (4) and drawing the result to a Screen.
 
 # Setting up the basic objects:
-s = Screen()
-c = Camera(s)
-w = World()
+cam = Camera()
+world = World()
 
 # Fill the world with objects:
 
-w.addShapes([
-    Line(Point(100,100,0), Point(200,100,0)),
-    Line(Point(100,100,0), Point(100,200,0)),
-    Line(Point(200,100,0), Point(200,200,0)),
-    Line(Point(100,200,0), Point(200,200,0)),
-    Line(Point(100,100,0), Point(100,100,100)),
-    Line(Point(200,100,0), Point(200,100,100)),
-    Line(Point(200,200,0), Point(200,200,100)),
-    Line(Point(100,200,0), Point(100,200,100)),
-    Line(Point(100,100,100), Point(100,200,100)),
-    Line(Point(100,100,100), Point(200,100,100)),
-    Line(Point(200,100,100), Point(200,200,100)),
-    Line(Point(100,200,100), Point(200,200,100)),
+world.addShapes([
+    Line(Point(0,0,0), Point(1,0,0)),
+    Line(Point(0,0,0), Point(0,1,0)),
+    Line(Point(0,0,0), Point(0,0,1)),
+    Line(Point(1,0,0), Point(1,1,0)),
+    Line(Point(1,0,0), Point(1,0,1)),
+    Line(Point(0,1,0), Point(1,1,0)),
+    Line(Point(0,1,0), Point(0,1,1)),
+    Line(Point(0,0,1), Point(1,0,1)),
+    Line(Point(0,0,1), Point(0,1,1)),
+    Line(Point(1,1,0), Point(1,1,1)),
+    Line(Point(1,0,1), Point(1,1,1)),
+    Line(Point(0,1,1), Point(1,1,1)),
 ])
 
-w.view(c)
+cam.lookAt(world)
