@@ -3,7 +3,7 @@ from calc import Matrix
 from canvas import Screen
 
 class Camera():
-    def __init__(self):
+    def __init__(self, screen):
         self.internal = Matrix(3,3).setTo([
             [100,0,200],
             [0,100,200],
@@ -12,7 +12,7 @@ class Camera():
             [1,0,0.5,0],
             [0,1,-0.2,0],
             [0,0,1,1]])
-        self.screen = Screen()
+        self.screen = screen
 
     def __str__(self):
         return ('Camera (\n M_int %s\n M_ext %s\n)' % (self.internal, self.external))
@@ -40,5 +40,4 @@ class Camera():
     def lookAt(self, world):
         for shape in world.getShapes():
             shape.project(self)
-        self.screen.show()
         

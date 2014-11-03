@@ -2,6 +2,9 @@ from projection import Camera
 from canvas import Screen
 from world import World
 from forms import Point, Line
+from program import Program
+
+program = Program()
 
 # Setting up a 3D scene:
 # (1) Looking through a Camera
@@ -10,7 +13,7 @@ from forms import Point, Line
 # (4) and drawing the result to a Screen.
 
 # Setting up the basic objects:
-cam = Camera()
+cam = Camera(program.getScreen())
 world = World()
 
 # Fill the world with objects:
@@ -31,3 +34,5 @@ world.addShapes([
 ])
 
 cam.lookAt(world)
+
+program.run()
