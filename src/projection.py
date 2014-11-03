@@ -9,8 +9,8 @@ class Camera():
             [0,100,200],
             [0,0,1]])
         self.external = Matrix(3,4).setTo([
-            [1,0,0.5,0],
-            [0,1,-0.2,0],
+            [1,0,0,0.5],
+            [0,1,0,0.5],
             [0,0,1,1]])
         self.screen = screen
 
