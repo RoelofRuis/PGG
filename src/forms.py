@@ -69,6 +69,31 @@ class Line(Projectable):
     def project(self, camera):
         camera.projectLine(self)
     
+# The Cube object represents a cube in 3d space
+class Cube(Projectable):
+    def __init__(self, point_center, size):
+        cx = point_center.getX()
+        cy = point_center.getY()
+        cz = point_center.getZ()
+        self.lines = [
+            Line(Point(cx,cy,cz), Point(cx+size,cy,cz)),
+            Line(Point(cx,cy,cz), Point(cx,cy+size,cz)),
+            Line(Point(cx,cy,cz), Point(cx,cy,cz+size)),
+            Line(Point(cx+size,cy,cz), Point(cx+size,cy+size,cz)),
+            Line(Point(cx+size,cy,cz), Point(cx+size,cy,cz+size)),
+            Line(Point(cx,cy+size,cz), Point(cx+size,cy+size,cz)),
+            Line(Point(cx,cy+size,cz), Point(cx,cy+size,cz+size)),
+            Line(Point(cx,cy,cz+size), Point(cx+size,cy,cz+size)),
+            Line(Point(cx,cy,cz+size), Point(cx,cy+size,cz+size)),
+            Line(Point(cx+size,cy+size,cz), Point(cx+size,cy+size,cz+size)),
+            Line(Point(cx+size,cy,cz+size), Point(cx+size,cy+size,cz+size)),
+            Line(Point(cx,cy+size,cz+size), Point(cx+size,cy+size,cz+size)),
+        ]
+
+    def project(self, camera):
+        for line in self.lines:
+            line.project(camera)
+
 
 # The Polygon object represents a polygon
 class Polygon():
