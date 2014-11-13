@@ -4,19 +4,23 @@ from world import World
 from forms import Point, Line, Cube, Polygon, House
 from program import Program
 
-program = Program()
+
 
 # Setting up a 3D scene:
-# (1) Looking through a Camera
-# (2) at a World
-# (3) which is filled with Shapes
-# (4) and drawing the result to a Screen.
+# (1) Initialize a Program:
+#     This is the frame which holds the program
+# (2) Setup a camera:
+#     This camera references a canvas that is drawn to the screen by the program
+# (3) Initialize a world:
+#     Setup the world and fill it with shapes which have to be displayable
+# (4) Look at the world through the camera.
+# (5) Run the program.
 
-# Setting up the basic objects:
+program = Program()
+
 cam = Camera(program.getScreen())
-world = World()
 
-# Fill the world with objects:
+world = World()
 
 world.addShapes([
     House(Point(-1, 0, 0), 1, 0.5),

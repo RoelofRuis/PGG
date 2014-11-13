@@ -1,5 +1,7 @@
 from Tkinter import *
 
+# The screen object is a simple wrapper for the Tkinter canvas on which the
+# graphics can be drawn.
 class Screen():
     def __init__(self, app):
         self.canvas = Canvas(app, width=800, height=800)

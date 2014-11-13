@@ -1,4 +1,9 @@
+# Author: Roelof Ruis
 # The matrix object represents a simple n times m matrix
+# 
+# Simple matrix operations are possible:
+# Initialize with zeros (zeros)
+# Multiplying with other matrix or vector.
 class Matrix():
     def __init__(self, n, m):
         self.n = n

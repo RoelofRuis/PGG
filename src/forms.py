@@ -9,6 +9,7 @@ class Projectable():
     def project(self):
         raise NotImplementedError()
 
+		
 # The Point object represents a point object in 3 Dimensional space
 class Point():
     def __init__(self, my_x, my_y, my_z):
@@ -73,6 +74,7 @@ class Line(Projectable):
     def project(self, camera):
         camera.projectLine(self)
     
+	
 # The Cube object represents a cube in 3d space
 class Cube(Projectable):
     def __init__(self, point_center, size):
@@ -122,6 +124,7 @@ class Polygon(Projectable):
         for line in self.lines:
             line.project(camera)
 
+# The house object represents a house
 class House(Projectable):
     def __init__(self, point_origin, size_cube, height_roof):
         pt_pl_front = point_origin.copyAddPosition(size_cube/2, -height_roof, 0) 

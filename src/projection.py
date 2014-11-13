@@ -2,6 +2,10 @@ from __future__ import division
 from calc import Matrix
 from canvas import Screen
 
+# The camera object represents a camera looking at the world
+# The way it works is by transforming all points in the world with a
+# projective transformation so they are displayed at the screen at the
+# correct position.
 class Camera():
     def __init__(self, screen):
         self.internal = Matrix(3,3).setTo([
