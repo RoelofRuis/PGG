@@ -2,7 +2,7 @@ from Tkinter import *
 
 class Screen():
     def __init__(self, app):
-        self.canvas = Canvas(app, width=400, height=400)
+        self.canvas = Canvas(app, width=800, height=800)
         self.canvas.pack()
 
     def drawLine(self, p1, p2):

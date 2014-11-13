@@ -5,13 +5,13 @@ from canvas import Screen
 class Camera():
     def __init__(self, screen):
         self.internal = Matrix(3,3).setTo([
-            [100,0,200],
-            [0,100,200],
+            [100,0,400],
+            [0,100,400],
             [0,0,1]])
         self.external = Matrix(3,4).setTo([
             [1,0,0,0.5],
             [0,1,0,0.5],
-            [0,0,1,1]])
+            [0,0,0.5,1]])
         self.screen = screen
 
     def __str__(self):

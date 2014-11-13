@@ -1,3 +1,4 @@
+from __future__ import division
 import math
 
 from calc import Matrix
@@ -36,6 +37,9 @@ class Point():
         self.x += new_x
         self.y += new_y
         self.z += new_z
+
+    def copyAddPosition(self, new_x, new_y, new_z):
+        return Point(self.x + new_x, self.y + new_y, self.z + new_z)
 
     def getHomCoords(self):
         return Matrix(4,1).setTo([[self.x], [self.y], [self.z], [1]])
@@ -96,11 +100,16 @@ class Cube(Projectable):
 
 
 # The Polygon object represents a polygon
-class Polygon():
+class Polygon(Projectable):
     def __init__(self, point_a, point_b, point_c):
         self.pt_a = point_a
         self.pt_b = point_b
         self.pt_c = point_c
+        self.lines = [
+            Line(self.pt_a, self.pt_b),
+            Line(self.pt_b, self.pt_c),
+            Line(self.pt_a, self.pt_c),
+        ]
         
     def __str__(self):
         return 'Polygon (%s, %s, %s,)' % (self.pt_a, self.pt_b, self.pt_c)
@@ -108,3 +117,31 @@ class Polygon():
     def getArea(self):
         b = Line(self.pt_a, self.pt_b).getLength()
         return b
+
+    def project(self, camera):
+        for line in self.lines:
+            line.project(camera)
+
+class House(Projectable):
+    def __init__(self, point_origin, size_cube, height_roof):
+        pt_pl_front = point_origin.copyAddPosition(size_cube/2, -height_roof, 0) 
+        pt_pl_back = point_origin.copyAddPosition(size_cube/2, -height_roof, size_cube)
+        self.house = [
+            Polygon(point_origin,
+                    point_origin.copyAddPosition(size_cube, 0, 0),
+                    pt_pl_front
+            ),
+            Polygon(point_origin.copyAddPosition(0, 0, size_cube),
+                    point_origin.copyAddPosition(size_cube, 0, size_cube),
+                    pt_pl_back
+            ),
+            Line(pt_pl_front, pt_pl_back
+            ),
+            Cube(point_origin, size_cube
+            ),  
+        ]
+        
+
+    def project(self, camera):
+        for obj in self.house:
+            obj.project(camera)

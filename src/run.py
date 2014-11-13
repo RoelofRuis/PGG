@@ -1,7 +1,7 @@
 from projection import Camera
 from canvas import Screen
 from world import World
-from forms import Point, Line, Cube
+from forms import Point, Line, Cube, Polygon, House
 from program import Program
 
 program = Program()
@@ -19,10 +19,9 @@ world = World()
 # Fill the world with objects:
 
 world.addShapes([
-    Cube(Point(0,0,0), 2),
-    Cube(Point(0,0,0), 1),
-    Cube(Point(0,0,0), 0.5),
-    Cube(Point(-4,0,3), 1),
+    House(Point(-1, 0, 0), 1, 0.5),
+    House(Point(0, 0, 0), 1, 0.5),
+    House(Point(1, 0, 0), 1, 0.5),
 ])
 
 cam.lookAt(world)
