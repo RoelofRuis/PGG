@@ -1,7 +1,7 @@
 from projection import Camera
 from canvas import Screen
 from world import World
-from forms import Point, Line, Cube, Polygon, House, PointyRoof, TriangleRoof, SlopedRoofXpositive, SlopedRoofXnegative
+from forms import Point, Line, Cube, Polygon, House, PointyRoof, TriangleRoof, SlopedRoofXpositive, SlopedRoofXnegative, RandomRoof, Street
 from program import Program
 
 
@@ -23,10 +23,7 @@ cam = Camera(program.getScreen())
 world = World()
 
 world.addShapes([
-    House(Point(-2, 0, 0), 1, 0.5, TriangleRoof),
-    House(Point(-1, 0, 0), 1, 0.5, SlopedRoofXnegative),
-    House(Point(0, 0, 0), 1, 0.5, PointyRoof),
-    House(Point(1, 0, 0), 1, 0.5, SlopedRoofXpositive)
+    Street(Point(-4, 0, -10), 1.5, 1, 10)
 ])
 
 cam.lookAt(world)

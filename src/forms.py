@@ -1,5 +1,6 @@
 from __future__ import division
 import math
+import random
 
 from calc import Matrix
 
@@ -219,3 +220,37 @@ class SlopedRoofXpositive(Roof):
         
     def fetch_projectables(self):
         return self.roof
+
+class RandomRoof(Roof):
+    def __init__(self, point_origin, size_cube, max_height):
+        i = random.randint(1, 4)
+        height_roof = random.uniform(0, max_height)
+        roof_type = {
+            1 : PointyRoof,
+            2 : TriangleRoof,
+            3 : SlopedRoofXnegative,
+            4 : SlopedRoofXpositive
+        }
+        random_roof = roof_type[i](point_origin, size_cube, height_roof)
+        self.roof_elems = random_roof.fetch_projectables()
+        
+
+    def fetch_projectables(self):
+        return self.roof_elems
+
+class Street(Projectable):
+    def __init__(self, street_origin, house_size, max_roof_height, house_count):
+        self.street = [] 
+        for i in range(0, house_count):
+            house_origins = street_origin.copyAddPosition(house_size*i, 0, 0)
+            self.street += [House(house_origins, house_size, max_roof_height, RandomRoof)]
+
+            
+              
+    def project(self, camera):
+        for house in self.street:
+            house.project(camera)
+        
+
+
+        
