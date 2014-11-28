@@ -125,11 +125,46 @@ class Polygon(Projectable):
             line.project(camera)
 
 # The house object represents a house
+
+class Roof():
+    def fetch_projectables(self):
+        raise NotImplementedError()
+
 class House(Projectable):
+    def __init__(self, point_origin, size_cube, height_roof, roof_type):
+        roof = roof_type(point_origin, size_cube, height_roof)
+        roof_elems = roof.fetch_projectables()
+        self.house = [
+            Cube(point_origin, size_cube
+            ), 
+        ] + roof_elems
+        
+    def project(self, camera):
+        for obj in self.house:
+            obj.project(camera)
+
+class PointyRoof(Roof):
+    def __init__(self, point_origin, size_cube, height_roof):
+        pt_pl_center = point_origin.copyAddPosition(size_cube/2, -height_roof, size_cube/2)       
+        self.roof = [
+            Polygon(point_origin,
+                    point_origin.copyAddPosition(size_cube, 0, 0),
+                    pt_pl_center
+            ),
+            Polygon(point_origin.copyAddPosition(0, 0, size_cube),
+                    point_origin.copyAddPosition(size_cube, 0, size_cube),
+                    pt_pl_center
+            ), 
+        ]
+
+    def fetch_projectables(self):
+        return self.roof
+
+class TriangleRoof(Roof):
     def __init__(self, point_origin, size_cube, height_roof):
         pt_pl_front = point_origin.copyAddPosition(size_cube/2, -height_roof, 0) 
         pt_pl_back = point_origin.copyAddPosition(size_cube/2, -height_roof, size_cube)
-        self.house = [
+        self.roof = [
             Polygon(point_origin,
                     point_origin.copyAddPosition(size_cube, 0, 0),
                     pt_pl_front
@@ -139,12 +174,48 @@ class House(Projectable):
                     pt_pl_back
             ),
             Line(pt_pl_front, pt_pl_back
-            ),
-            Cube(point_origin, size_cube
             ),  
         ]
         
+    def fetch_projectables(self):
+        return self.roof
 
-    def project(self, camera):
-        for obj in self.house:
-            obj.project(camera)
+class SlopedRoofXnegative(Roof):
+    def __init__(self, point_origin, size_cube, height_roof):
+        pt_pl_front = point_origin.copyAddPosition(0, -height_roof, 0) 
+        pt_pl_back = point_origin.copyAddPosition(0, -height_roof, size_cube)
+        self.roof = [
+            Polygon(point_origin,
+                    point_origin.copyAddPosition(size_cube, 0, 0),
+                    pt_pl_front
+            ),
+            Polygon(point_origin.copyAddPosition(0, 0, size_cube),
+                    point_origin.copyAddPosition(size_cube, 0, size_cube),
+                    pt_pl_back
+            ),
+            Line(pt_pl_front, pt_pl_back
+            ),  
+        ]
+        
+    def fetch_projectables(self):
+        return self.roof
+
+class SlopedRoofXpositive(Roof):
+    def __init__(self, point_origin, size_cube, height_roof):
+        pt_pl_front = point_origin.copyAddPosition(size_cube, -height_roof, 0) 
+        pt_pl_back = point_origin.copyAddPosition(size_cube, -height_roof, size_cube)
+        self.roof = [
+            Polygon(point_origin,
+                    point_origin.copyAddPosition(size_cube, 0, 0),
+                    pt_pl_front
+            ),
+            Polygon(point_origin.copyAddPosition(0, 0, size_cube),
+                    point_origin.copyAddPosition(size_cube, 0, size_cube),
+                    pt_pl_back
+            ),
+            Line(pt_pl_front, pt_pl_back
+            ),  
+        ]
+        
+    def fetch_projectables(self):
+        return self.roof
